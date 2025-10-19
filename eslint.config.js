@@ -6,7 +6,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,jsx}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
   pluginReact.configs.flat.recommended,
-  globalIgnores(["**/*.test.jsx"]),
+  globalIgnores(["**/*.test.jsx", "coverage/*"]),
   {
     settings: {
       react: {
