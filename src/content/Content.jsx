@@ -1,10 +1,20 @@
 // React
-// import React from 'react'
+import React from 'react'
+
+// MUI
+import {Stack} from '@mui/material'
+
+// Custom
+import Map from './Map'
 
 
 function Content() {
 
-    return null
+    return (
+        <Stack spacing={1}>
+            <Map />
+        </Stack>
+    )
 }
 
 export default Content
