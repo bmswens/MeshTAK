@@ -19,6 +19,11 @@ function Map() {
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 className='map-tiles'
+                // TODO: Add tile caching capability
+                // tile load start can be used to intercept src and rewrite if in cache
+                // eventHandlers={{
+                //     tileloadstart: (x, y) => x.tile.src = "http://bad.com"
+                // }}
             />
             <Marker position={[51.505, -0.09]}>
                 <Popup>

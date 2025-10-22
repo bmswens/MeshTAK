@@ -8,6 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 // Custom
 import TopNav from './nav/TopNav'
 import Content from './content/Content'
+import {RightDrawerProvider} from './nav/RightDrawer'
 
 const darkTheme = createTheme({
   palette: {
@@ -21,8 +22,10 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <TopNav />
-      <Content />
+      <RightDrawerProvider>
+        <TopNav />
+        <Content />
+      </RightDrawerProvider>
     </ThemeProvider>
   )
 }

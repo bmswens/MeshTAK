@@ -2,17 +2,50 @@
 import React from 'react'
 
 // MUI
-import {AppBar, Box, Toolbar, Typography} from '@mui/material'
+import {AppBar, Box, IconButton, Toolbar, Tooltip, Typography} from '@mui/material'
+import {useTheme} from '@mui/material/styles'
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
+
+// MUI Icons
+import MessageIcon from '@mui/icons-material/Message';
+
+// Custom
+// import SerialButton from './SerialButton'
+import RightDrawer from './RightDrawer'
 
 function TopNav() {
 
+    const rightDrawer = React.useContext(RightDrawer)
+    const theme = useTheme()
+
+    function openMessages() {
+        rightDrawer.next("messages")
+    }
+
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static">
+            <AppBar
+                position="fixed"
+                sx={{
+                    zIndex: theme.zIndex.drawer + 1
+                }}
+            >
                 <Toolbar>
                     <Typography variant="h6">
                         MeshTAK
                     </Typography>
+                    <DoubleArrowIcon />
+                    <Tooltip
+                        title="Messages"
+                    >
+                        <IconButton
+                            onClick={openMessages}
+                        >
+                            <MessageIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Box sx={{flexGrow: 1}} />
+                    {/* <SerialButton /> */}
                 </Toolbar>
             </AppBar>
         </Box>
