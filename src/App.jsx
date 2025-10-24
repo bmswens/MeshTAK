@@ -9,6 +9,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import TopNav from './nav/TopNav'
 import Content from './content/Content'
 import {RightDrawerProvider} from './nav/RightDrawer'
+import { DeviceContextProvider } from './context/DeviceContext'
 
 const darkTheme = createTheme({
   palette: {
@@ -22,10 +23,12 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <RightDrawerProvider>
-        <TopNav />
-        <Content />
-      </RightDrawerProvider>
+      <DeviceContextProvider>
+        <RightDrawerProvider>
+          <TopNav />
+          <Content />
+        </RightDrawerProvider>
+      </DeviceContextProvider>
     </ThemeProvider>
   )
 }

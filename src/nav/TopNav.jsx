@@ -10,8 +10,8 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
 import MessageIcon from '@mui/icons-material/Message';
 
 // Custom
-// import SerialButton from './SerialButton'
 import RightDrawer from './RightDrawer'
+import ConnectionButton from './ConnectionButtion';
 
 function TopNav() {
 
@@ -41,11 +41,11 @@ function TopNav() {
                         <IconButton
                             onClick={openMessages}
                         >
-                            <MessageIcon />
+                            <MessageIcon fontSize="large" />
                         </IconButton>
                     </Tooltip>
                     <Box sx={{flexGrow: 1}} />
-                    {/* <SerialButton /> */}
+                    <ConnectionButton />
                 </Toolbar>
             </AppBar>
         </Box>
