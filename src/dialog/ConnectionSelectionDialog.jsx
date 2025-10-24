@@ -47,7 +47,6 @@ function ConnectionSelectionDialog(props) {
                 <RadioGroup
                     value={selected}
                     onChange={onChange}
-                    row
                 >
                     <FormControlLabel value="bluetooth" control={<Radio />} label="Bluetooth" />
                     <FormControlLabel value="serial" control={<Radio />} label="Serial" />
