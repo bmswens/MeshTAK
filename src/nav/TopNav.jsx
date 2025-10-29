@@ -8,6 +8,7 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
 
 // MUI Icons
 import MessageIcon from '@mui/icons-material/Message';
+import PolylineIcon from '@mui/icons-material/Polyline';
 
 // Custom
 import RightDrawer from './RightDrawer'
@@ -20,6 +21,10 @@ function TopNav() {
 
     function openMessages() {
         rightDrawer.next("messages")
+    }
+
+    function openNodes() {
+        rightDrawer.next("nodes")
     }
 
     return (
@@ -42,6 +47,15 @@ function TopNav() {
                             onClick={openMessages}
                         >
                             <MessageIcon fontSize="large" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                        title="Nodes"
+                    >
+                        <IconButton
+                            onClick={openNodes}
+                        >
+                            <PolylineIcon fontSize="large" />
                         </IconButton>
                     </Tooltip>
                     <Box sx={{flexGrow: 1}} />

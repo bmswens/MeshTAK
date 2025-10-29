@@ -6,6 +6,7 @@ import { Drawer } from '@mui/material'
 
 // Custom
 import MessageDrawer from './drawers/MessageDrawer'
+import NodeDrawer from './drawers/nodes/NodeDrawer'
 
 const RightDrawer = React.createContext({
     next: /* v8 ignore next */ (target, opts) => { },
@@ -13,7 +14,8 @@ const RightDrawer = React.createContext({
 })
 
 const drawers = {
-    messages: MessageDrawer
+    messages: MessageDrawer,
+    nodes: NodeDrawer
 }
 
 

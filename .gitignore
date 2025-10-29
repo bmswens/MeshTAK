@@ -4,3 +4,7 @@ dist
 dist-ssr
 *.local
 coverage
+
+# dev
+nodeInfo.json
+nodeMessage.json

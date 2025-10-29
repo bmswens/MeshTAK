@@ -11,6 +11,9 @@ import { TransportWebBluetooth } from '@meshtastic/transport-web-bluetooth'
 // Because utils isn't in the browser
 import {Logger} from 'tslog'
 
+// custom
+import startSubscriptions from '../db/subscriptions';
+
 
 const DeviceContext = React.createContext({
     device: null,
@@ -31,13 +34,14 @@ function DeviceContextProvider(props) {
         else {
             transport = await TransportWebBluetooth.create()
         }
-        const logger = new Logger({type: "pretty"})
+        const logger = new Logger({type: "hidden"})
         const dev = new MeshDevice(transport)
         dev.log = logger
-        dev.events.onMessagePacket.subscribe(console.log)
-        dev.events.onPositionPacket.subscribe(console.log)
-        dev.events.onMyNodeInfo.subscribe(console.log)
-        dev.events.onNodeInfoPacket.subscribe(console.log)
+        startSubscriptions(dev)
+        // dev.events.onMessagePacket.subscribe(console.log)
+        // dev.events.onPositionPacket.subscribe(console.log)
+        // dev.events.onMyNodeInfo.subscribe(console.log)
+        // dev.events.onNodeInfoPacket.subscribe(console.log)
         await dev.configure()
         setDevice(dev)
     }
