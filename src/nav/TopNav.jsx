@@ -2,9 +2,8 @@
 import React from 'react'
 
 // MUI
-import {AppBar, Box, IconButton, Toolbar, Tooltip, Typography} from '@mui/material'
+import {AppBar, Box, Divider, IconButton, Toolbar, Tooltip, Typography} from '@mui/material'
 import {useTheme} from '@mui/material/styles'
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
 
 // MUI Icons
 import MessageIcon from '@mui/icons-material/Message';
@@ -13,6 +12,7 @@ import PolylineIcon from '@mui/icons-material/Polyline';
 // Custom
 import RightDrawer from './RightDrawer'
 import ConnectionButton from './ConnectionButtion';
+import LogoButton from './LogoButton';
 
 function TopNav() {
 
@@ -36,10 +36,8 @@ function TopNav() {
                 }}
             >
                 <Toolbar>
-                    <Typography variant="h6">
-                        MeshTAK
-                    </Typography>
-                    <DoubleArrowIcon />
+                    <LogoButton />
+                    <Divider orientation="vertical" flexItem variant='middle' sx={{marginLeft: 1, marginRight: 1}} />
                     <Tooltip
                         title="Messages"
                     >

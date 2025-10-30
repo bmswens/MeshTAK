@@ -17,7 +17,7 @@ import startSubscriptions from '../db/subscriptions';
 
 const DeviceContext = React.createContext({
     device: null,
-    connect: /* v8 ignore next */ async (method) => {},
+    connect: /* v8 ignore next */ async () => {},
     disconnect: /* v8 ignore next */ async () => {}
 })
 

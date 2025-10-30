@@ -8,7 +8,7 @@ describe('<TopNav>', function() {
         render(
             <TopNav />
         )
-        let title = screen.getByText("MeshTAK")
+        let title = screen.getByAltText("MeshTAK")
         expect(title).not.toBeNull()
     })
     it("should be able to open and close the <MessageDrawer />", async function() {
