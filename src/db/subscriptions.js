@@ -1,7 +1,6 @@
 import db from './index'
 
 async function subscribeMessage(message) {
-    console.log("Recieved Message", message)
     await db.messages.add(message)
 }
 
@@ -30,7 +29,7 @@ async function subscribeNodeInfo(nodeInfo) {
             longName: data.longName,
             shortName: data.shortName
         }
-        await db.nodes.put(updated, updated.nodeNum)
+        await db.nodes.update(updated.nodeNum, updated)
     }
     if (nodeInfo.position) {
         let position = {
@@ -39,9 +38,6 @@ async function subscribeNodeInfo(nodeInfo) {
             lat: nodeInfo.position.latitudeI / 1e7, 
             lon: nodeInfo.position.longitudeI / 1e7,
             alt: nodeInfo.position.altitude
-        }
-        if (nodeInfo.position.time * 1000        < 17613546 * 1000) {
-            console.log(nodeInfo)
         }
         await db.locations.upsert(position.nodeNum, position)
     }
@@ -53,3 +49,7 @@ function startSubscriptions(device) {
 }
 
 export default startSubscriptions
+export {
+    subscribeMessage,
+    subscribeNodeInfo
+}

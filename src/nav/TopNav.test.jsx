@@ -41,7 +41,7 @@ describe('<TopNav>', function() {
         await waitFor(async () => {
             let closeButton = screen.getByRole("button", {name: "Close"})
             expect(closeButton).not.toBeNull()
-            await user.click(button)
+            await user.click(closeButton)
         })
         await waitFor(() => {
             let notMissingButton = screen.queryByRole("button", {name: "Close"})
