@@ -10,6 +10,7 @@ env:
 
 jobs:
   lint:
+    name: Lint
     runs-on: self-hosted
     steps:
       - name: Checkout
@@ -38,29 +39,48 @@ jobs:
         run: npm run lint
 
   test:
+    name: Test
     runs-on: self-hosted
+    needs: lint
     steps:
-    - name: Checkout
-      uses: actions/checkout@v5
+      - name: Checkout
+        uses: actions/checkout@v5
 
-    - name: Restore Node Modules
-      id: cache-npm
-      uses: actions/cache@v4
-      with:
-        key: ${{ hashFiles('package-lock.json') }}
-        path: node_modules
+      - name: Restore Node Modules
+        id: cache-npm
+        uses: actions/cache@v4
+        with:
+          key: ${{ hashFiles('package-lock.json') }}
+          path: node_modules
 
-    - name: Install
-      if: steps.cache-npm.outputs.cache-hit != 'true'
-      run: npm install
+      - name: Install
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: npm install
 
-    - name: Cache Node Modules
-      id: cache-npm-save
-      if: steps.cache-npm.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
-      with:
-        key: ${{ hashFiles('package-lock.json') }}
-        path: node_modules
+      - name: Cache Node Modules
+        id: cache-npm-save
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          key: ${{ hashFiles('package-lock.json') }}
+          path: node_modules
 
-    - name: Test
-      run: npm run test -- --coverage
+      - name: Test
+        run: npm run test -- --coverage
+
+  build:
+    name: Build
+    runs-on: self-hosted
+    needs: ['lint', 'test']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Build
+        run: docker build -t bmswens/MeshTAK:${{ github.sha }} .
+
+      - name: Docker Login
+        run: docker login -u bmswens -p ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Docker push
+        run: docker push bmswens/MeshTAK:${{ github.sha }}
