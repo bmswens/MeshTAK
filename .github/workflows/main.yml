@@ -72,6 +72,7 @@ jobs:
     name: Build
     runs-on: self-hosted
     needs: ['lint', 'test']
+    environment: Main
     steps:
       - name: Checkout
         uses: actions/checkout@v5
