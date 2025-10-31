@@ -11,6 +11,9 @@ import { TransportWebBluetooth } from '@meshtastic/transport-web-bluetooth'
 // Because utils isn't in the browser
 import {Logger} from 'tslog'
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 // custom
 import startSubscriptions from '../db/subscriptions';
 
@@ -56,6 +59,10 @@ function DeviceContextProvider(props) {
             {props.children}
         </DeviceContext.Provider>
     )
+}
+
+DeviceContextProvider.propTypes = {
+    children: PropTypes.any
 }
 
 export default DeviceContext

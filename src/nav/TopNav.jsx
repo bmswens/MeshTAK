@@ -2,7 +2,7 @@
 import React from 'react'
 
 // MUI
-import {AppBar, Box, Divider, IconButton, Toolbar, Tooltip, Typography} from '@mui/material'
+import {AppBar, Box, Divider, IconButton, Toolbar, Tooltip} from '@mui/material'
 import {useTheme} from '@mui/material/styles'
 
 // MUI Icons

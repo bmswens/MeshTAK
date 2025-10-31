@@ -8,7 +8,7 @@ import {Stack} from '@mui/material'
 import DrawerTopper from './DrawerTopper'
 
 
-function MessageDrawer(props) {
+function MessageDrawer() {
     return (
         <>
         <DrawerTopper />

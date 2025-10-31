@@ -4,6 +4,9 @@ import React from 'react'
 // MUI
 import {Autocomplete, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 
 function EditTeamsDialog(props) {
 
@@ -60,6 +63,13 @@ function EditTeamsDialog(props) {
             </DialogActions>
         </Dialog>
     )
+}
+
+EditTeamsDialog.propTypes = {
+    open: PropTypes.bool,
+    close: PropTypes.func,
+    submit: PropTypes.func,
+    teams: PropTypes.array
 }
 
 export default EditTeamsDialog

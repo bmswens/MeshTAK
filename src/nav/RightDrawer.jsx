@@ -4,12 +4,15 @@ import React from 'react'
 // MUI
 import { Drawer } from '@mui/material'
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 // Custom
 import MessageDrawer from './drawers/MessageDrawer'
 import NodeDrawer from './drawers/nodes/NodeDrawer'
 
 const RightDrawer = React.createContext({
-    next: /* v8 ignore next */ (target, opts) => { },
+    next: /* v8 ignore next */ () => { },
     close: /* v8 ignore next */ () => { }
 })
 
@@ -75,6 +78,10 @@ function RightDrawerProvider(props) {
             </Drawer>
         </RightDrawer.Provider>
     )
+}
+
+RightDrawerProvider.propTypes = {
+    children: PropTypes.any
 }
 
 export default RightDrawer

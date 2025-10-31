@@ -1,0 +1,66 @@
+name: Main CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  CI: 'true'
+
+jobs:
+  lint:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Restore Node Modules
+        id: cache-npm
+        uses: actions/cache@v4
+        with:
+          key: ${{ hashFiles('package-lock.json') }}
+          path: node_modules
+
+      - name: Install
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Cache Node Modules
+        id: cache-npm-save
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          key: ${{ hashFiles('package-lock.json') }}
+          path: node_modules
+
+      - name: Lint
+        runs: npm run lint
+
+  test:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5
+
+    - name: Restore Node Modules
+      id: cache-npm
+      uses: actions/cache@v4
+      with:
+        key: ${{ hashFiles('package-lock.json') }}
+        path: node_modules
+
+    - name: Install
+      if: steps.cache-npm.outputs.cache-hit != 'true'
+      run: npm install
+
+    - name: Cache Node Modules
+      id: cache-npm-save
+      if: steps.cache-npm.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        key: ${{ hashFiles('package-lock.json') }}
+        path: node_modules
+
+    - name: Test
+      runs: npm run test -- --coverage

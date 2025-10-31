@@ -6,6 +6,9 @@ import {Box, Divider, IconButton, Stack, Tooltip} from '@mui/material'
 import {useTheme} from '@mui/material/styles'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 // custom
 import RightDrawer from '../RightDrawer'
 
@@ -44,7 +47,10 @@ function DrawerTopper(props) {
             <Divider />
         </>
     )
+}
 
+DrawerTopper.propTypes = {
+    children: PropTypes.any
 }
 
 export default DrawerTopper

@@ -4,6 +4,9 @@ import React from 'react'
 // MUI
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Radio, RadioGroup } from '@mui/material'
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 // Custom
 import DeviceContext from '../context/DeviceContext'
 
@@ -68,6 +71,11 @@ function ConnectionSelectionDialog(props) {
             </DialogActions>
         </Dialog>
     )
+}
+
+ConnectionSelectionDialog.propTypes = {
+    open: PropTypes.bool,
+    close: PropTypes.func
 }
 
 export default ConnectionSelectionDialog

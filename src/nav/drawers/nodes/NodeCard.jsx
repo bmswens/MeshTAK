@@ -8,6 +8,11 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline'
 import MessageIcon from '@mui/icons-material/Message'
 import MapIcon from '@mui/icons-material/Map';
 import GroupsIcon from '@mui/icons-material/Groups';
+
+// Prop Types
+import PropTypes from 'prop-types'
+
+// Custom
 import EditTeamsDialog from '../../../dialog/EditTeamsDialog'
 import db from '../../../db'
 
@@ -103,6 +108,15 @@ function NodeCard(props) {
             </CardActions>
         </Card>
     )
+}
+
+NodeCard.propTypes = {
+    shortName: PropTypes.string,
+    longName: PropTypes.string,
+    lastHeard: PropTypes.instanceOf(Date),
+    favorite: PropTypes.bool,
+    teams: PropTypes.arrayOf(PropTypes.string),
+    nodeNum: PropTypes.number
 }
 
 export default NodeCard
