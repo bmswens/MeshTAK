@@ -87,3 +87,23 @@ jobs:
 
       - name: Docker push
         run: docker push bmswens/meshtak:${{ github.sha }}
+
+  staging:
+    name: Deploy Staging
+    runs-on: self-hosted
+    needs: ["lint", "test", "build"]
+    environment: Main
+    steps:
+      - name: Stop
+        run: docker stop meshtak || true
+
+      - name: Remove
+        run: docker rm meshtak || true
+
+      - name: Start
+        run: >
+          docker run
+          --restart unless-stopped
+          --network ${{ env.STAGING_NETWORK }}
+          --name meshtak
+          bmswens/meshtak:${{ github.sha }}
