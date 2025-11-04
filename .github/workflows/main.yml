@@ -113,4 +113,5 @@ jobs:
           --restart unless-stopped
           --network $STAGING_NETWORK
           --name meshtak
+          -d
           bmswens/meshtak:${{ github.sha }}
