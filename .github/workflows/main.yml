@@ -100,10 +100,17 @@ jobs:
       - name: Remove
         run: docker rm meshtak || true
 
+      - name: Docker Login
+        env:
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+        run: docker login -u bmswens -p $DOCKER_TOKEN
+
       - name: Start
+        env:
+          STAGING_NETWORK: ${{ env.STAGING_NETWORK }}
         run: >
           docker run
           --restart unless-stopped
-          --network ${{ env.STAGING_NETWORK }}
+          --network $STAGING_NETWORK
           --name meshtak
           bmswens/meshtak:${{ github.sha }}
