@@ -107,7 +107,7 @@ jobs:
 
       - name: Start
         env:
-          STAGING_NETWORK: ${{ env.STAGING_NETWORK }}
+          STAGING_NETWORK: ${{ vars.STAGING_NETWORK }}
         run: >
           docker run
           --restart unless-stopped
