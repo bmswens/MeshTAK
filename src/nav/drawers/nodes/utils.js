@@ -42,7 +42,7 @@ function search(nodes, searchText) {
 }
 
 function sort(nodes, method) {
-
+    console.log(nodes, method)
 }
 
 const utils = {
