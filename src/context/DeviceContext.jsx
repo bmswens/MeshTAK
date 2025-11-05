@@ -37,14 +37,10 @@ function DeviceContextProvider(props) {
         else {
             transport = await TransportWebBluetooth.create()
         }
-        const logger = new Logger({type: "hidden"})
+        const logger = new Logger({type: "pretty"})
         const dev = new MeshDevice(transport)
         dev.log = logger
         startSubscriptions(dev)
-        // dev.events.onMessagePacket.subscribe(console.log)
-        // dev.events.onPositionPacket.subscribe(console.log)
-        // dev.events.onMyNodeInfo.subscribe(console.log)
-        // dev.events.onNodeInfoPacket.subscribe(console.log)
         await dev.configure()
         setDevice(dev)
     }
