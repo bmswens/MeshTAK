@@ -8,7 +8,7 @@ import { Drawer } from '@mui/material'
 import PropTypes from 'prop-types'
 
 // Custom
-import MessageDrawer from './drawers/MessageDrawer'
+import MessageDrawer from './drawers/messages/MessageDrawer'
 import NodeDrawer from './drawers/nodes/NodeDrawer'
 
 const RightDrawer = React.createContext({
