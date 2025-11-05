@@ -2,8 +2,11 @@
 import React from 'react'
 
 // MUI
-import {Avatar, Box, Card, CardActions, CardContent, CardHeader, Chip, Grid, IconButton, Skeleton, Typography, Tooltip} from '@mui/material'
+import {Avatar, Box, Card, CardActions, CardContent, CardHeader, IconButton, Skeleton, Typography, Tooltip} from '@mui/material'
 import ReplyIcon from '@mui/icons-material/Reply';
+
+// linting
+import PropTypes from 'prop-types'
 
 // custom
 import db from '../../../db'
@@ -74,6 +77,12 @@ function MessageCard(props) {
             </CardActions>
         </Card>
     )
+}
+
+MessageCard.propTypes = {
+    from: PropTypes.number,
+    rxTime: PropTypes.objectOf(Date),
+    data: PropTypes.string
 }
 
 export default MessageCard
