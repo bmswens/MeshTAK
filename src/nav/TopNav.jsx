@@ -8,6 +8,8 @@ import {useTheme} from '@mui/material/styles'
 // MUI Icons
 import MessageIcon from '@mui/icons-material/Message';
 import PolylineIcon from '@mui/icons-material/Polyline';
+import MapIcon from '@mui/icons-material/Map';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 // Custom
 import RightDrawer from './RightDrawer'
@@ -48,6 +50,15 @@ function TopNav() {
                         </IconButton>
                     </Tooltip>
                     <Tooltip
+                        title="Map Layers"
+                    >
+                        <IconButton
+                        
+                        >
+                            <MapIcon fontSize="large" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip
                         title="Nodes"
                     >
                         <IconButton
@@ -58,6 +69,15 @@ function TopNav() {
                     </Tooltip>
                     <Box sx={{flexGrow: 1}} />
                     <ConnectionButton />
+                    <Tooltip
+                        title="Settings"
+                    >
+                        <IconButton
+                        
+                        >
+                            <SettingsIcon fontSize="large" />
+                        </IconButton>
+                    </Tooltip>
                 </Toolbar>
             </AppBar>
         </Box>
