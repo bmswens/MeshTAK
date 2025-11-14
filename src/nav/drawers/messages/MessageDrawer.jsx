@@ -23,6 +23,16 @@ function MessageArea() {
     const [shouldSubmit, setShouldSubmit] = React.useState(false)
     const [text, setText] = React.useState('')
 
+    const drawerWidth = useLiveQuery(async () => {
+        let w = await db.settings.get("drawerWidth")
+        if (w === undefined) {
+            w = {
+                value: 25
+            }
+        }
+        return w.value
+    }, [], [])
+
     React.useEffect(() => {
         function submit() {
             device.sendText(text)
@@ -35,18 +45,18 @@ function MessageArea() {
     }, [shouldSubmit])
 
     return (
-        <Box 
+        <Box
             spacing={1}
             sx={{
                 position: "fixed",
                 right: "1em",
                 bottom: 0,
-                width: "calc(15vw - 1em)",
+                width: `calc(${drawerWidth}vw - 1em)`,
                 zIndex: 9999,
                 background: theme.palette.background.default,
             }}
         >
-            <Stack spacing={1} sx={{margin: 1}}>
+            <Stack spacing={1} sx={{ margin: 1 }}>
                 <Divider />
                 <TextField
                     label="Send Message"
@@ -54,23 +64,23 @@ function MessageArea() {
                     fullWidth
                     slotProps={{
                         input: {
-                            endAdornment: 
-                            <Tooltip
-                                title="Send"
-                            >
-                                <span>
-                                    <IconButton
-                                        size='small'
-                                        disabled={text.length === 0}
-                                        onClick={() => setShouldSubmit(true)}
-                                        loading={shouldSubmit}
-                                        aria-label="Send"
-                                    >
-                                        <SendIcon fontSize='small' />
-                                    </IconButton>
-                                </span>
-                            </Tooltip>
-                            
+                            endAdornment:
+                                <Tooltip
+                                    title="Send"
+                                >
+                                    <span>
+                                        <IconButton
+                                            size='small'
+                                            disabled={text.length === 0}
+                                            onClick={() => setShouldSubmit(true)}
+                                            loading={shouldSubmit}
+                                            aria-label="Send"
+                                        >
+                                            <SendIcon fontSize='small' />
+                                        </IconButton>
+                                    </span>
+                                </Tooltip>
+
                         }
                     }}
                     value={text}
@@ -93,10 +103,10 @@ function MessageDrawer() {
     return (
         <>
             <DrawerTopper />
-            <Stack spacing={1} sx={{margin: 1}}>
+            <Stack spacing={1} sx={{ margin: 1 }}>
                 <MessageArea />
                 {messages.map(message => <MessageCard {...message} key={message.id} />)}
-                <Box sx={{height: "64px"}} />
+                <Box sx={{ height: "64px" }} />
             </Stack>
         </>
     )

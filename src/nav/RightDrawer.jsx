@@ -7,9 +7,14 @@ import { Drawer } from '@mui/material'
 // Prop Types
 import PropTypes from 'prop-types'
 
+// Dexie
+import { useLiveQuery } from "dexie-react-hooks";
+
 // Custom
 import MessageDrawer from './drawers/messages/MessageDrawer'
 import NodeDrawer from './drawers/nodes/NodeDrawer'
+import SettingsDrawer from './drawers/settings/SettingsDrawer'
+import db from '../db'
 
 const RightDrawer = React.createContext({
     next: /* v8 ignore next */ () => { },
@@ -18,7 +23,8 @@ const RightDrawer = React.createContext({
 
 const drawers = {
     messages: MessageDrawer,
-    nodes: NodeDrawer
+    nodes: NodeDrawer,
+    settings: SettingsDrawer
 }
 
 
@@ -29,8 +35,15 @@ function RightDrawerProvider(props) {
     const [upNext, setNext] = React.useState(null)
     const [data, setData] = React.useState({})
 
-    // probably make this a setting later
-    const drawerWidth = "15vw"
+    const drawerWidth = useLiveQuery(async () => {
+        let w = await db.settings.get("drawerWidth")
+        if (w === undefined) {
+            w = {
+                value: 25
+            }
+        }
+        return w.value
+    }, [], [])
 
     function next(target, opts) {
         setNext(target)
@@ -66,10 +79,10 @@ function RightDrawerProvider(props) {
                 onClose={close}
                 variant="persistent"
                 sx={{
-                    width: drawerWidth,
+                    width: `${drawerWidth}vw`,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
-                        width: drawerWidth,
+                        width: `${drawerWidth}vw`,
                         boxSizing: 'border-box',
                     },
                 }}

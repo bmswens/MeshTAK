@@ -29,6 +29,10 @@ function TopNav() {
         rightDrawer.next("nodes")
     }
 
+    function openSettings() {
+        rightDrawer.next("settings")
+    }
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar
@@ -73,7 +77,7 @@ function TopNav() {
                         title="Settings"
                     >
                         <IconButton
-                        
+                            onClick={openSettings}
                         >
                             <SettingsIcon fontSize="large" />
                         </IconButton>
