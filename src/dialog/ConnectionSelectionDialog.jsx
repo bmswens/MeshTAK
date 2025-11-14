@@ -59,7 +59,7 @@ function ConnectionSelectionDialog(props) {
                 <Button
                     onClick={close}
                 >
-                    Cancel
+                    Close
                 </Button>
                 <Button
                     variant="contained"

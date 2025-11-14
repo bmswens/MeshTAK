@@ -14,7 +14,7 @@ describe('<ConnectionSelectionDialog>', function() {
                 close={close}
             />
         )
-        let cancel = screen.getByRole("button", { name: "Cancel"})
+        let cancel = screen.getByRole("button", { name: "Close"})
         await user.click(cancel)
         expect(close).toHaveBeenCalled()
     })
