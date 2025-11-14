@@ -19,7 +19,7 @@ describe('<ConnectionButton> unconnected', function() {
             let dialog = screen.getByRole("dialog")
             expect(dialog).not.toBeNull()
         })
-        let cancel = screen.getByRole("button", { name: "Cancel"})
+        let cancel = screen.getByRole("button", { name: "Close"})
         await user.click(cancel)
         await waitFor(() => {
             let missingDialog = screen.queryByRole("dialog")

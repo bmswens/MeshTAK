@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import TopNav from './TopNav'
 import { RightDrawerProvider } from './RightDrawer';
 import userEvent from '@testing-library/user-event'
+import DeviceContext from '../context/DeviceContext'
 
 describe('<TopNav>', function() {
     it("should display the app name", function() {
@@ -14,9 +15,11 @@ describe('<TopNav>', function() {
     it("should be able to open and close the <MessageDrawer />", async function() {
         const user = userEvent.setup()
         render(
-            <RightDrawerProvider>
-                <TopNav />
-            </RightDrawerProvider>
+            <DeviceContext.Provider value={{ device: true}}>
+                <RightDrawerProvider>
+                    <TopNav />
+                </RightDrawerProvider>
+            </DeviceContext.Provider>
         )
         let button = screen.getByRole("button", {name: "Messages"})
         await user.click(button)
@@ -32,9 +35,11 @@ describe('<TopNav>', function() {
     it("should reopen when clicked on already selected drawer", async function() {
         const user = userEvent.setup()
         render(
-            <RightDrawerProvider>
-                <TopNav />
-            </RightDrawerProvider>
+            <DeviceContext.Provider value={{ device: true}}>
+                <RightDrawerProvider>
+                    <TopNav />
+                </RightDrawerProvider>
+            </DeviceContext.Provider>
         )
         let button = screen.getByRole("button", {name: "Messages"})
         await user.click(button)

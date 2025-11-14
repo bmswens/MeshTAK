@@ -15,9 +15,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import RightDrawer from './RightDrawer'
 import ConnectionButton from './ConnectionButtion';
 import LogoButton from './LogoButton';
+import DeviceContext from '../context/DeviceContext';
 
 function TopNav() {
 
+    const { device } = React.useContext(DeviceContext)
     const rightDrawer = React.useContext(RightDrawer)
     const theme = useTheme()
 
@@ -47,11 +49,28 @@ function TopNav() {
                     <Tooltip
                         title="Messages"
                     >
-                        <IconButton
-                            onClick={openMessages}
-                        >
-                            <MessageIcon fontSize="large" />
-                        </IconButton>
+                        <span>
+                            <IconButton
+                                onClick={openMessages}
+                                disabled={device === null}
+                                aria-label="Messages"
+                            >
+                                <MessageIcon fontSize="large" />
+                            </IconButton>
+
+                        </span>
+                    </Tooltip>
+                    <Tooltip
+                        title="Nodes"
+                    >
+                        <span>
+                            <IconButton
+                                onClick={openNodes}
+                                disabled={device === null}
+                            >
+                                <PolylineIcon fontSize="large" />
+                            </IconButton>
+                        </span>
                     </Tooltip>
                     <Tooltip
                         title="Map Layers"
@@ -60,15 +79,6 @@ function TopNav() {
                         
                         >
                             <MapIcon fontSize="large" />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip
-                        title="Nodes"
-                    >
-                        <IconButton
-                            onClick={openNodes}
-                        >
-                            <PolylineIcon fontSize="large" />
                         </IconButton>
                     </Tooltip>
                     <Box sx={{flexGrow: 1}} />
