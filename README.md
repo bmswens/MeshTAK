@@ -18,3 +18,5 @@
 This repository contains the source code for the MeshTAK progressive web app, enabling text messaging, location sharing, COT data, and more over a decentralized mesh network.
 
 ## Stats
+
+![Alt](https://repobeats.axiom.co/api/embed/e90c916515df252a85b5d3cfe2a6cf36881358fc.svg "Repobeats analytics image")
