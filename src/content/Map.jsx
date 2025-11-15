@@ -10,8 +10,11 @@ import { useLiveQuery } from "dexie-react-hooks";
 // custom
 import db from '../db'
 import UserLocation from './map/UserLocation'
+import DeviceContext from '../context/DeviceContext';
 
 function Map() {
+
+    const { device } = React.useContext(DeviceContext)
 
     const locations = useLiveQuery(() => {
         return db.locations.toArray()
@@ -38,6 +41,10 @@ function Map() {
             />
             <UserLocation />
             {
+                device === null
+                ?
+                null
+                :
                 locations.map(location => {
                     return (
                         <Marker position={[location.lat, location.lon]} key={location.nodeNum}>
