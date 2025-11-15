@@ -3,20 +3,33 @@ import React from 'react'
 
 // MUI
 import {IconButton, Tooltip} from '@mui/material'
+import InfoDialog from '../dialog/InfoDialog'
 
 
 function LogoButton() {
 
-    return (
-        <Tooltip
-            title="About MeshTAK"
-        >
-            <IconButton
+    const [open, setOpen] = React.useState(false)
 
+    function close() {
+        setOpen(false)
+    }
+
+    return (
+        <>
+            <Tooltip
+                title="About MeshTAK"
             >
-                <img src="/MeshTAK.png" style={{height: "35px", width: "35px"}} alt="MeshTAK" />
-            </IconButton>
-        </Tooltip>
+                <IconButton
+                    onClick={() => setOpen(true)}
+                >
+                    <img src="/MeshTAK.png" style={{height: "35px", width: "35px"}} alt="MeshTAK" />
+                </IconButton>
+            </Tooltip>
+            <InfoDialog
+                open={open}
+                close={close}
+            />
+        </>
     )
 
 }
