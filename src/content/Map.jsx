@@ -4,9 +4,12 @@ import React from 'react'
 // Leaflet
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
-// custom
+// Dexie
 import { useLiveQuery } from "dexie-react-hooks";
+
+// custom
 import db from '../db'
+import UserLocation from './map/UserLocation'
 
 function Map() {
 
@@ -33,6 +36,7 @@ function Map() {
                 //     tileloadstart: (x, y) => x.tile.src = "http://bad.com"
                 // }}
             />
+            <UserLocation />
             {
                 locations.map(location => {
                     return (

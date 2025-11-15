@@ -6,6 +6,16 @@ import "fake-indexeddb/auto";
 // mport {indexedDB} from "fake-indexeddb";
 
 
+navigator.geolocation = {
+    getCurrentPosition: () => {
+        return {
+            loading: true
+        }
+    },
+    watchPosition: () => {},
+    clearWatch: () => {}
+}
+
 expect.extend(matchers);
 afterEach(cleanup);
 
