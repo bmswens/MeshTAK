@@ -11,6 +11,12 @@ import { useGeolocation } from "@uidotdev/usehooks";
 import { useLeafletContext } from '@react-leaflet/core'
 import L from 'leaflet'
 
+// Dexie
+import { useLiveQuery } from "dexie-react-hooks";
+
+// custom
+import db from '../../db';
+
 
 function makeSVG(color, heading) {
     let degrees = heading
@@ -26,28 +32,42 @@ function makeSVG(color, heading) {
 
 function UserLocation() {
 
-        const location = useGeolocation({enableHighAccuracy: true})
-        const context = useLeafletContext()
-        const theme = useTheme()
+    const location = useGeolocation({ enableHighAccuracy: true })
+    const context = useLeafletContext()
+    const theme = useTheme()
 
-        React.useEffect(() => {
-            if (!location.loading) {
-                const icon = L.divIcon({
-                    html: makeSVG(theme.palette.primary[theme.palette.mode], location.heading),
-                    iconSize: [48, 48],
-                    className: "empty-marker"
-                })
-                const marker = L.marker([location.latitude, location.longitude], { icon })
-                const container = context.layerContainer || context.map
-                container.addLayer(marker)
-                return () => {
-                    container.removeLayer(marker)
-                }
+    const [initial, setInitial] = React.useState(true)
+
+    const centerOnLoad = useLiveQuery(async () => {
+        let setting = await db.settings.get("centerOnLoad")
+        return setting ? setting.value : true
+    }, [], null)
+
+    React.useEffect(() => {
+        if (!location.loading) {
+            const icon = L.divIcon({
+                html: makeSVG(theme.palette.primary[theme.palette.mode], location.heading),
+                iconSize: [48, 48],
+                className: "empty-marker"
+            })
+            const marker = L.marker([location.latitude, location.longitude], { icon })
+            const container = context.layerContainer || context.map
+            container.addLayer(marker)
+            if (initial && centerOnLoad) {
+                context.map.setView([location.latitude, location.longitude], 10, { animate: true })
+                setInitial(false)
             }
-        }, [location, context])
+            else if (initial && centerOnLoad !== null) {
+                setInitial(false)
+            }
+            return () => {
+                container.removeLayer(marker)
+            }
+        }
+    }, [location, context, initial, centerOnLoad])
 
-        return null
+    return null
 
-    }
+}
 
 export default UserLocation

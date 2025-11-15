@@ -7,6 +7,7 @@ import { Stack } from '@mui/material'
 // Custom
 import DrawerTopper from '../DrawerTopper'
 import AppSettings from './AppSettings';
+import MapSettings from './MapSettings';
 
 
 function SettingsDrawer() {
@@ -16,7 +17,8 @@ function SettingsDrawer() {
             <DrawerTopper>
             </DrawerTopper>
             <Stack spacing={1} sx={{ margin: 1 }}>
-                    <AppSettings />
+                <AppSettings />
+                <MapSettings />
             </Stack>
         </>
     )
