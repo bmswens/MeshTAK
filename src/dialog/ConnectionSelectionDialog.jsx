@@ -29,9 +29,21 @@ function ConnectionSelectionDialog(props) {
 
     React.useEffect(() => {
         async function load() {
-            await connect(selected)
+            let attempt = 0
+            let connected = false
+            while (!connected && attempt < 3) {
+                try {
+                    await connect(selected)
+                    connected = true
+                }
+                catch {
+                    attempt += 1
+                }
+            }
             setLoading(false)
-            close()
+            if (connected) {
+                close()
+            }
         }
         if (loading) {
             load()
