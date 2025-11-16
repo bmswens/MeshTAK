@@ -5,6 +5,19 @@ import * as matchers from '@testing-library/jest-dom/matchers';
 import "fake-indexeddb/auto";
 // mport {indexedDB} from "fake-indexeddb";
 
+class MockNotification {
+    permission = "default"
+    
+    constructor() {
+
+    }
+
+    static async requestPermission () {
+        return "denied"
+    }
+}
+
+window.Notification = MockNotification
 
 navigator.geolocation = {
     getCurrentPosition: () => {

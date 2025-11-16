@@ -5,8 +5,8 @@ import db from '../../../db';
 import AppSettings from './AppSettings'
 import { fireEvent } from '@testing-library/dom';
 
-describe('<AppSettings>', function() {
-    it("should allow the user to change drawer size", async function() {
+describe('<AppSettings>', function () {
+    it("should allow the user to change drawer size", async function () {
         const user = userEvent.setup()
         render(
             <AppSettings />
@@ -26,6 +26,25 @@ describe('<AppSettings>', function() {
         await waitFor(async () => {
             let width = await db.settings.get("drawerWidth")
             expect(width.value).toEqual(75)
+        })
+    })
+    it("should allow the user to change notification prefs", async function () {
+        const user = userEvent.setup()
+        window.Notification.permission = "denied"
+        render(
+            <AppSettings />
+        )
+        let title = screen.getByText(/App Settings/)
+        await user.click(title)
+        await waitFor(() => {
+            let text = screen.getByText(/Allow Notifications/)
+            expect(text).not.toBeNull()
+        })
+        let checkbox = screen.getByRole("checkbox")
+        await user.click(checkbox)
+        await waitFor(async () => {
+            let autoCenter = await db.settings.get("notifications")
+            expect(autoCenter.value).toEqual(true)
         })
     })
 })

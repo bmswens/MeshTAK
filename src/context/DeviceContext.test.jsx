@@ -3,6 +3,7 @@ import { vi, vitest } from 'vitest'
 import DeviceContext, { DeviceContextProvider } from './DeviceContext'
 import React from 'react'
 import userEvent from '@testing-library/user-event'
+import db from '../db'
 
 function Tester() {
     const { connect, disconnect } = React.useContext(DeviceContext)
@@ -94,6 +95,23 @@ describe('<DeviceContextProvider>', function () {
         await user.click(button)
         await waitFor(() => {
             expect(messageSubscription).toHaveBeenCalled()
+        })
+    })
+    it("should handle notifications allowed", async function() {
+        Notification.requestPermission = vi.fn().mockResolvedValue("granted")
+        let user = userEvent.setup()
+        render(
+            <DeviceContextProvider>
+                <Tester />
+            </DeviceContextProvider>
+        )
+        let button = screen.getByRole("button", { name: "bluetooth" })
+        await user.click(button)
+        await waitFor(async () => {
+            expect(messageSubscription).toHaveBeenCalled()
+            expect(Notification.requestPermission).toHaveBeenCalled()
+            let setting = await db.settings.get("notifications")
+            expect(setting.value).toEqual(true)
         })
     })
     it("should allow a user to disconnect", async function() {

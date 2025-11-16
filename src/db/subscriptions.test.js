@@ -7,6 +7,14 @@ describe('subscribeMessage()', function() {
         let message = await db.messages.get(1)
         expect(message.data).toEqual("My Message")
     })
+    it("should send notifications", async function() {
+        // TODO: Probably set a mock on Notification constructor to ensure notifiation is sent correctly
+        await db.settings.upsert("notifications", {value: true})
+        await db.nodes.upsert(6, {longName: "Chad Brochill"})
+        await subscribeMessage({id: 3, data: "My Other Message", from: 6})
+        let message = await db.messages.get(1)
+        expect(message.data).toEqual("My Message")
+    })
 })
 
 describe('subscribeNodeInfo', function() {

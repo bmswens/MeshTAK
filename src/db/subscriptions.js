@@ -2,6 +2,16 @@ import db from './index'
 
 async function subscribeMessage(message) {
     await db.messages.add(message)
+    let notificationsSetting = await db.settings.get("notifications")
+    if (notificationsSetting !== undefined && notificationsSetting.value) {
+        let sender = await db.nodes.get(message.from)
+        if (sender === undefined) {
+            sender = {
+                longName: "Unknown"
+            }
+        }
+        new Notification(`${sender.longName}: ${message.data}`)
+    }
 }
 
 async function subscribeNodeInfo(nodeInfo) {

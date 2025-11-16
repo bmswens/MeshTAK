@@ -15,7 +15,7 @@ import db from '../../../db';
 function AutomaticCenterSetting() {
 
     const settingName = "centerOnLoad"
-    
+
     const centerOnLoad = useLiveQuery(async () => {
         let setting = await db.settings.get(settingName)
         if (setting === undefined) {
@@ -27,14 +27,14 @@ function AutomaticCenterSetting() {
     }, [], [])
 
     async function handleChange(event) {
-        await db.settings.upsert(settingName, {value: event.target.checked})
+        await db.settings.upsert(settingName, { value: event.target.checked })
     }
 
     return (
         <Stack direction="row">
             <Typography>Automatic Center</Typography>
-            <Box sx={{flexGrow: 1}} />
-            <Switch 
+            <Box sx={{ flexGrow: 1 }} />
+            <Switch
                 checked={centerOnLoad}
                 onChange={handleChange}
                 slotProps={{ input: { 'aria-label': 'center-on-load' } }}

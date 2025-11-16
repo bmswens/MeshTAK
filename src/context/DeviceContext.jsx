@@ -15,7 +15,8 @@ import {Logger} from 'tslog'
 import PropTypes from 'prop-types'
 
 // custom
-import startSubscriptions from '../db/subscriptions';
+import startSubscriptions from '../db/subscriptions'
+import db from '../db';
 
 
 const DeviceContext = React.createContext({
@@ -28,6 +29,24 @@ const DeviceContext = React.createContext({
 function DeviceContextProvider(props) {
 
     const [device, setDevice] = React.useState(null)
+
+    React.useEffect(() => {
+        if (device !== null) {
+            const statuses = ["granted", "denied"]
+            if (!statuses.includes(Notification.permission)) {
+                Notification.requestPermission()
+                .then(permission => {
+                    if (permission === "granted") {
+                        db.settings.upsert("notifications", {value: true})
+                        new Notification('Notifications enabled for MeshTAK. You may disable them at any time in the "App Settings" menu.')
+                    }
+                    else {
+                        db.settings.upsert("notifications", {value: false})
+                    }
+                })
+            }
+        }
+    }, [device])
 
     async function connect(method) {
         let transport
