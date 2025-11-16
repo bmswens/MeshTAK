@@ -25,7 +25,7 @@ function InfoDialog(props) {
             </DialogTitle>
             <DialogContent>
                 <Stack spacing={1} alignItems="center" >
-                    <img src="/MeshTAK.png" style={{height: "256px", width: "256px"}} alt="MeshTAK" />
+                    <img src="/MeshTAK-512.png" style={{height: "256px", width: "256px"}} alt="MeshTAK" />
                     <Divider />
                     <Typography align="center">
                         MeshTAK is a progressive web app, which enables text messaging, location sharing, COT data, and more over a decentralized mesh network.

@@ -1,6 +1,7 @@
 {
     "includeAssets": [
         "MeshTAK-512.png",
+        "MeshTAK-512-maskable.png",
         "MeshTAK-192.png"
     ],
     "manifest": {
@@ -8,6 +9,7 @@
         "short_name": "MeshTAK",
         "description": "MeshTAK enables text messaging, location sharing, COT data, and more over a decentralized mesh network.",
         "theme_color": "#121212",
+        "background_color": "#121212",
         "icons": [
             {
                 "src": "MeshTAK-512.png",
@@ -16,7 +18,7 @@
                 "purpose": "any"
             },
             {
-                "src": "MeshTAK-512.png",
+                "src": "MeshTAK-512-maskable.png",
                 "sizes": "512x512",
                 "type": "image/png",
                 "purpose": "maskable"

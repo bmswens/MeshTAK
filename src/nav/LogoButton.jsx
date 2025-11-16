@@ -22,7 +22,7 @@ function LogoButton() {
                 <IconButton
                     onClick={() => setOpen(true)}
                 >
-                    <img src="/MeshTAK.png" style={{height: "35px", width: "35px"}} alt="MeshTAK" />
+                    <img src="/MeshTAK-512.png" style={{height: "35px", width: "35px"}} alt="MeshTAK" />
                 </IconButton>
             </Tooltip>
             <InfoDialog
