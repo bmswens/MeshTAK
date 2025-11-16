@@ -8,3 +8,4 @@ coverage
 # dev
 nodeInfo.json
 nodeMessage.json
+dev-dist
