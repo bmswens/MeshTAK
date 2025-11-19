@@ -16,7 +16,7 @@ function SettingsDrawer() {
         <>
             <DrawerTopper>
             </DrawerTopper>
-            <Stack spacing={1} sx={{ margin: 1 }}>
+            <Stack sx={{ margin: 1 }}>
                 <AppSettings />
                 <MapSettings />
             </Stack>
