@@ -44,7 +44,7 @@ function UserLocation() {
     }, [], null)
 
     React.useEffect(() => {
-        if (!location.loading) {
+        if (!location.loading && location.latitude !== null && location.longitude !== null) {
             const icon = L.divIcon({
                 html: makeSVG(theme.palette.primary[theme.palette.mode], location.heading),
                 iconSize: [48, 48],
