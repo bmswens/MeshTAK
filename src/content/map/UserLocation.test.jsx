@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import UserLocation from "./UserLocation"
 import { MapContainer } from "react-leaflet"
+import db from '../../db'
 
 
 describe('<UserLocation>', function () {
@@ -40,6 +41,27 @@ describe('<UserLocation>', function () {
         await waitFor(() => {
             let div = screen.getByTestId('self-marker')
             expect(div).not.toBeNull()
+            // console.log(divs)
+        })
+    })
+    it("should be hidden based on setting", async function() {
+        await db.settings.upsert("map.userlayer.display", { value: false })
+        render(
+            <MapContainer
+                center={[39.833333, -98.583333]}
+                zoom={5}
+                style={{
+                    height: "calc(100vh - 64px)",
+                    width: "100%"
+                }}
+                attributionControl={false}
+            >
+                <UserLocation />
+            </MapContainer>
+        )
+        await waitFor(() => {
+            let div = screen.queryByTestId('self-marker')
+            expect(div).toBeNull()
             // console.log(divs)
         })
     })

@@ -2,23 +2,13 @@
 import React from 'react'
 
 // Leaflet
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-
-// Dexie
-import { useLiveQuery } from "dexie-react-hooks";
+import { MapContainer, TileLayer} from 'react-leaflet'
 
 // custom
-import db from '../db'
 import UserLocation from './map/UserLocation'
-import DeviceContext from '../context/DeviceContext';
+import NodeLocations from './map/NodeLocations';
 
 function Map() {
-
-    const { device } = React.useContext(DeviceContext)
-
-    const locations = useLiveQuery(() => {
-        return db.locations.toArray()
-    }, [], [])
 
     return (
         <MapContainer 
@@ -40,21 +30,7 @@ function Map() {
                 // }}
             />
             <UserLocation />
-            {
-                device === null
-                ?
-                null
-                :
-                locations.map(location => {
-                    return (
-                        <Marker position={[location.lat, location.lon]} key={location.nodeNum}>
-                            <Popup>
-                                {location.nodeNum}: {location.lastSeen.toISOString()}
-                            </Popup>
-                        </Marker>
-                    )
-                })
-            }
+            <NodeLocations />
         </MapContainer>
     )
 

@@ -43,8 +43,20 @@ function UserLocation() {
         return setting ? setting.value : true
     }, [], null)
 
+    const settingName = "map.userlayer.display"
+
+    const display = useLiveQuery(async () => {
+        let setting = await db.settings.get(settingName)
+        if (setting === undefined) {
+            setting = {
+                value: true
+            }
+        }
+        return setting.value
+    }, [], [])
+
     React.useEffect(() => {
-        if (!location.loading && location.latitude !== null && location.longitude !== null) {
+        if (display && !location.loading && location.latitude !== null && location.longitude !== null) {
             const icon = L.divIcon({
                 html: makeSVG(theme.palette.primary[theme.palette.mode], location.heading),
                 iconSize: [48, 48],
@@ -64,7 +76,7 @@ function UserLocation() {
                 container.removeLayer(marker)
             }
         }
-    }, [location, context, initial, centerOnLoad])
+    }, [location, context, initial, centerOnLoad, display])
 
     return null
 

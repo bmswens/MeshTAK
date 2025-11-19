@@ -35,6 +35,10 @@ function TopNav() {
         rightDrawer.next("settings")
     }
 
+    function openMapLayers() {
+        rightDrawer.next("map")
+    }
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar
@@ -76,7 +80,7 @@ function TopNav() {
                         title="Map Layers"
                     >
                         <IconButton
-                        
+                            onClick={openMapLayers}
                         >
                             <MapIcon fontSize="large" />
                         </IconButton>

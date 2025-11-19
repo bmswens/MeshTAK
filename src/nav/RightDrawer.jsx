@@ -15,6 +15,7 @@ import MessageDrawer from './drawers/messages/MessageDrawer'
 import NodeDrawer from './drawers/nodes/NodeDrawer'
 import SettingsDrawer from './drawers/settings/SettingsDrawer'
 import db from '../db'
+import MapDrawer from './drawers/map/MapDrawer';
 
 const RightDrawer = React.createContext({
     next: /* v8 ignore next */ () => { },
@@ -24,7 +25,8 @@ const RightDrawer = React.createContext({
 const drawers = {
     messages: MessageDrawer,
     nodes: NodeDrawer,
-    settings: SettingsDrawer
+    settings: SettingsDrawer,
+    map: MapDrawer
 }
 
 
