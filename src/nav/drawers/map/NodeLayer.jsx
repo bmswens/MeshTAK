@@ -39,7 +39,6 @@ function DisplaySetting() {
                 checked={display}
                 onChange={handleChange}
                 slotProps={{ input: { 'aria-label': 'displaye node layer' } }}
-                disabled={Notification.permission === "default"}
             />
         </Stack>
     )
