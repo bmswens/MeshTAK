@@ -5,6 +5,8 @@ import * as matchers from '@testing-library/jest-dom/matchers';
 import "fake-indexeddb/auto";
 // mport {indexedDB} from "fake-indexeddb";
 
+var Blob = require('blob-polyfill').Blob;
+
 class MockNotification {
     permission = "default"
     
@@ -28,6 +30,14 @@ navigator.geolocation = {
     watchPosition: () => {},
     clearWatch: () => {}
 }
+
+if (!Uint8Array.prototype.toHex) {
+      Uint8Array.prototype.toHex = function () {
+        return Array.from(this)
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join('');
+      };
+    }
 
 expect.extend(matchers);
 afterEach(cleanup);

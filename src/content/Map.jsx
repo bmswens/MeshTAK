@@ -7,6 +7,7 @@ import { MapContainer, TileLayer} from 'react-leaflet'
 // custom
 import UserLocation from './map/UserLocation'
 import NodeLocations from './map/NodeLocations';
+import UserLayers from './map/UserLayers'
 
 function Map() {
 
@@ -31,6 +32,8 @@ function Map() {
             />
             <UserLocation />
             <NodeLocations />
+            <UserLayers />
+            {/* {states.features.map(feature => <Feature geojson={feature} />)} */}
         </MapContainer>
     )
 

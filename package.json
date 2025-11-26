@@ -20,6 +20,7 @@
 		"@mui/icons-material": "^7.3.4",
 		"@mui/material": "^7.3.4",
 		"@uidotdev/usehooks": "^2.4.1",
+		"blob-polyfill": "^9.0.20240710",
 		"dexie": "^4.2.1",
 		"dexie-react-hooks": "^4.2.0",
 		"leaflet": "^1.9.4",

@@ -38,7 +38,7 @@ function DisplaySetting() {
             <Switch
                 checked={display}
                 onChange={handleChange}
-                slotProps={{ input: { 'aria-label': 'displaye user layer' } }}
+                slotProps={{ input: { 'aria-label': 'display user layer' } }}
             />
         </Stack>
     )
