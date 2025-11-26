@@ -8,7 +8,7 @@ import {useTheme} from '@mui/material/styles'
 // MUI Icons
 import MessageIcon from '@mui/icons-material/Message';
 import PolylineIcon from '@mui/icons-material/Polyline';
-import MapIcon from '@mui/icons-material/Map';
+import LayersIcon from '@mui/icons-material/Layers';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 // Custom
@@ -51,6 +51,15 @@ function TopNav() {
                     <LogoButton />
                     <Divider orientation="vertical" flexItem variant='middle' sx={{marginLeft: 1, marginRight: 1}} />
                     <Tooltip
+                        title="Map Layers"
+                    >
+                        <IconButton
+                            onClick={openMapLayers}
+                        >
+                            <LayersIcon fontSize="large" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip
                         title="Messages"
                     >
                         <span>
@@ -75,15 +84,6 @@ function TopNav() {
                                 <PolylineIcon fontSize="large" />
                             </IconButton>
                         </span>
-                    </Tooltip>
-                    <Tooltip
-                        title="Map Layers"
-                    >
-                        <IconButton
-                            onClick={openMapLayers}
-                        >
-                            <MapIcon fontSize="large" />
-                        </IconButton>
                     </Tooltip>
                     <Box sx={{flexGrow: 1}} />
                     <ConnectionButton />
