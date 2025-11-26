@@ -20,6 +20,7 @@ async function featureCollectionToTable(name, file) {
             await addLayer(name, features)
         }
         catch (err) {
+            console.error(err)
             throw new Error("File type must be geojson, geojson array, or newline geojson.")
         }
     }

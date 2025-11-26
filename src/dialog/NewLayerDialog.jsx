@@ -69,6 +69,7 @@ function EditTeamsDialog(props) {
                 close()
             })
             .catch(err => {
+                console.error(err)
                 setError(true)
                 setShouldSubmit(false)
             })

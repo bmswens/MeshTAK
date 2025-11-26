@@ -5,6 +5,9 @@ import React from 'react'
 import { useLeafletContext } from '@react-leaflet/core'
 import L from 'leaflet'
 
+// prop types
+import PropTypes from 'prop-types'
+
 
 function Feature(props) {
 
@@ -29,6 +32,10 @@ function Feature(props) {
     }, [geojson])
 
     return null
+}
+
+Feature.propTypes = {
+    geojson: PropTypes.object
 }
 
 export default Feature
