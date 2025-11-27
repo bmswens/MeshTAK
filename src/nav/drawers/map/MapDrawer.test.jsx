@@ -1,7 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import db from '../../../db';
-import UserLayer from './UserLayer';
 import MapDrawer from './MapDrawer';
 
 describe('<MapDrawer>', function() {

@@ -45,7 +45,7 @@ describe('<UserLocation>', function () {
         })
     })
     it("should be hidden based on setting", async function() {
-        await db.settings.upsert("map.userlayer.display", { value: false })
+        await db.settings.upsert("map.userlocation.display", { value: false })
         render(
             <MapContainer
                 center={[39.833333, -98.583333]}

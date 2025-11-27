@@ -44,7 +44,7 @@ function UserLocation() {
         return setting ? setting.value : true
     }, [], null)
 
-    const settingName = "map.userlayer.display"
+    const settingName = "map.userlocation.display"
 
     const display = useLiveQuery(async () => {
         let setting = await db.settings.get(settingName)
@@ -57,7 +57,7 @@ function UserLocation() {
     }, [], [])
 
     const size = useLiveQuery(async () => {
-        let setting = await db.settings.get("map.userlayer.size")
+        let setting = await db.settings.get("map.userlocation.size")
         if (setting === undefined) {
             setting = {
                 value: 36
@@ -67,7 +67,7 @@ function UserLocation() {
     }, [], 36)
 
     const color = useLiveQuery(async () => {
-        let setting = await db.settings.get("map.userlayer.color")
+        let setting = await db.settings.get("map.userlocation.color")
         if (setting === undefined) {
             setting = {
                 value: defaultColor

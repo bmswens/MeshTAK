@@ -1,14 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import db from '../../../db';
-import UserLayer from './UserLayer';
+import UserLocation from './UserLocation';
 import { fireEvent } from '@testing-library/dom';
 
-describe('<UserLayer>', function() {
+describe('<UserLocation>', function() {
     it("should allow the user to toggle on and off", async function() {
         const user = userEvent.setup()
         render(
-            <UserLayer />
+            <UserLocation />
         )
         let title = screen.getByText(/User Layer/)
         await user.click(title)
@@ -19,14 +19,14 @@ describe('<UserLayer>', function() {
         let checkbox = screen.getByRole("checkbox")
         await user.click(checkbox)
         await waitFor(async () => {
-            let setting = await db.settings.get("map.userlayer.display")
+            let setting = await db.settings.get("map.userlocation.display")
             expect(setting.value).toEqual(false)
         })
     })
     it("should allow the user to change size", async function() {
         const user = userEvent.setup()
         render(
-            <UserLayer />
+            <UserLocation />
         )
         let title = screen.getByText(/User Layer/)
         await user.click(title)
@@ -37,14 +37,14 @@ describe('<UserLayer>', function() {
         const slider = document.querySelector('input[type="range"]')
         fireEvent.change(slider, { target: { value: 48 } });
         await waitFor(async () => {
-            let setting = await db.settings.get("map.userlayer.size")
+            let setting = await db.settings.get("map.userlocation.size")
             expect(setting.value).toEqual(48)
         })
     })
     it("should allow the user to change color", async function() {
         const user = userEvent.setup()
         render(
-            <UserLayer />
+            <UserLocation />
         )
         let title = screen.getByText(/User Layer/)
         await user.click(title)
@@ -57,7 +57,7 @@ describe('<UserLayer>', function() {
         await user.type(textbox, "{enter}")
         // console.log(textbox)
         await waitFor(async () => {
-            let setting = await db.settings.get("map.userlayer.color")
+            let setting = await db.settings.get("map.userlocation.color")
             expect(setting.value).toEqual("#42a5f5")
         })
     })

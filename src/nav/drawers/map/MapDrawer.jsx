@@ -7,7 +7,7 @@ import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 
 // Custom
 import DrawerTopper from '../DrawerTopper'
-import UserLayer from './UserLayer'
+import UserLocation from './UserLocation'
 import NodeLayer from './NodeLayer'
 import NewLayerDialog from '../../../dialog/NewLayerDialog'
 
@@ -44,7 +44,7 @@ function MapDrawer() {
                 <NewLayerButton />
             </DrawerTopper>
             <Stack sx={{ margin: 1 }}>
-                <UserLayer />
+                <UserLocation />
                 <NodeLayer />
             </Stack>
         </>

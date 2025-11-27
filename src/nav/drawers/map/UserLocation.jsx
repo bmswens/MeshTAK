@@ -21,7 +21,7 @@ function ColorSetting() {
 
     const theme = useTheme()
     const defaultColor = theme.palette.primary[theme.palette.mode]
-    const settingName = "map.userlayer.color"
+    const settingName = "map.userlocation.color"
 
     const color = useLiveQuery(async () => {
         let setting = await db.settings.get(settingName)
@@ -55,7 +55,7 @@ function ColorSetting() {
 
 function SizeSetting() {
 
-    const settingName = "map.userlayer.size"
+    const settingName = "map.userlocation.size"
 
     const size = useLiveQuery(async () => {
         let setting = await db.settings.get(settingName)
@@ -90,7 +90,7 @@ function SizeSetting() {
 
 function DisplaySetting() {
 
-    const settingName = "map.userlayer.display"
+    const settingName = "map.userlocation.display"
 
     const display = useLiveQuery(async () => {
         let setting = await db.settings.get(settingName)
@@ -120,10 +120,10 @@ function DisplaySetting() {
 }
 
 
-function UserLayer() {
+function UserLocation() {
 
     const display = useLiveQuery(async () => {
-        let setting = await db.settings.get("map.userlayer.display")
+        let setting = await db.settings.get("map.userlocation.display")
         if (setting === undefined) {
             setting = {
                 value: true
@@ -155,4 +155,4 @@ function UserLayer() {
     )
 }
 
-export default UserLayer
+export default UserLocation
