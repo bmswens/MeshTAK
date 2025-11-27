@@ -24,6 +24,7 @@
 		"dexie": "^4.2.1",
 		"dexie-react-hooks": "^4.2.0",
 		"leaflet": "^1.9.4",
+		"mui-color-input": "^7.0.0",
 		"react": "^19.0.0-rc.1",
 		"react-dom": "^19.0.0-rc.1",
 		"react-leaflet": "^5.0.0-rc.2",

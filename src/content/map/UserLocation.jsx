@@ -35,6 +35,7 @@ function UserLocation() {
     const location = useGeolocation({ enableHighAccuracy: true })
     const context = useLeafletContext()
     const theme = useTheme()
+    const defaultColor = theme.palette.primary[theme.palette.mode]
 
     const [initial, setInitial] = React.useState(true)
 
@@ -55,11 +56,31 @@ function UserLocation() {
         return setting.value
     }, [], [])
 
+    const size = useLiveQuery(async () => {
+        let setting = await db.settings.get("map.userlayer.size")
+        if (setting === undefined) {
+            setting = {
+                value: 36
+            }
+        }
+        return setting.value
+    }, [], 36)
+
+    const color = useLiveQuery(async () => {
+        let setting = await db.settings.get("map.userlayer.color")
+        if (setting === undefined) {
+            setting = {
+                value: defaultColor
+            }
+        }
+        return setting.value
+    }, [], defaultColor)
+
     React.useEffect(() => {
         if (display && !location.loading && location.latitude !== null && location.longitude !== null) {
             const icon = L.divIcon({
-                html: makeSVG(theme.palette.primary[theme.palette.mode], location.heading),
-                iconSize: [48, 48],
+                html: makeSVG(color, location.heading),
+                iconSize: [size, size],
                 className: "empty-marker"
             })
             const marker = L.marker([location.latitude, location.longitude], { icon })
@@ -76,7 +97,7 @@ function UserLocation() {
                 container.removeLayer(marker)
             }
         }
-    }, [location, context, initial, centerOnLoad, display])
+    }, [location, context, initial, centerOnLoad, display, size, color])
 
     return null
 

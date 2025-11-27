@@ -2,16 +2,91 @@
 import React from 'react'
 
 // MUI
-import { Accordion, AccordionDetails, AccordionSummary, Box, Stack, Switch, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Stack, Slider, Switch, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
+// color picker
+import { MuiColorInput } from 'mui-color-input'
 
 // Dexie
 import { useLiveQuery } from "dexie-react-hooks";
 
 // custom
 import db from '../../../db';
+
+function ColorSetting() {
+
+    const theme = useTheme()
+    const defaultColor = theme.palette.primary[theme.palette.mode]
+    const settingName = "map.userlayer.color"
+
+    const color = useLiveQuery(async () => {
+        let setting = await db.settings.get(settingName)
+        if (setting === undefined) {
+            setting = {
+                value: defaultColor
+            }
+        }
+        return setting.value
+    }, [], defaultColor)
+
+    async function handleChange(newValue) {
+        if (!newValue) {
+            newValue = defaultColor
+        }
+        await db.settings.upsert(settingName, {value: newValue})
+    }
+
+    return (
+        <>
+            <Typography>Marker Color</Typography>
+            <MuiColorInput 
+                format="hex" 
+                value={color} 
+                onChange={handleChange} 
+            />
+        </>
+    )
+
+}
+
+function SizeSetting() {
+
+    const settingName = "map.userlayer.size"
+
+    const size = useLiveQuery(async () => {
+        let setting = await db.settings.get(settingName)
+        if (setting === undefined) {
+            setting = {
+                value: 36
+            }
+        }
+        return setting.value
+    }, [], 36)
+
+    async function handleChange(event, newValue) {
+        await db.settings.upsert(settingName, {value: newValue})
+    }
+
+    return (
+        <>
+            <Typography>Marker Size</Typography>
+            <Slider
+                value={size}
+                onChange={handleChange}
+                max={48}
+                min={12}
+                step={12}
+                marks
+                aria-label='Marker Size'
+                valueLabelDisplay="auto"
+            />
+        </>
+    )
+}
 
 function DisplaySetting() {
 
@@ -72,6 +147,8 @@ function UserLayer() {
             <AccordionDetails>
                 <Stack spacing={1}>
                     <DisplaySetting />
+                    <SizeSetting />
+                    <ColorSetting />
                 </Stack>
             </AccordionDetails>
         </Accordion>
