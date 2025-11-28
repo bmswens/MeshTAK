@@ -22,8 +22,8 @@ describe('utils', function () {
             ]
         }
         let file = new File([JSON.stringify(data)], "mything.json")
-        await utils.featureCollectionToTable('mything', file)
-        let results = await db.layerData.where({layer: "mything"}).toArray()
+        let id = await utils.featureCollectionToTable('mything', file)
+        let results = await db.layerData.where({layer: id}).toArray()
         expect(results.length).toEqual(1)
         expect(results[0].name).toEqual("Center Of World")
     })
@@ -39,8 +39,8 @@ describe('utils', function () {
             }
         ]
         let file = new File([JSON.stringify(data)], "mything.json")
-        await utils.featureCollectionToTable('mything', file)
-        let results = await db.layerData.where({layer: "mything"}).toArray()
+        let id = await utils.featureCollectionToTable('mything', file)
+        let results = await db.layerData.where({layer: id}).toArray()
         expect(results.length).toEqual(1)
         expect(results[0].name).toEqual("Center Of World")
     })
@@ -52,8 +52,8 @@ describe('utils', function () {
             { "type": "Feature", "geometry": { "type": "Point", "coordinates": [0, 0] }, "name": "Center Of World 1" }
         ]
         let file = new File([data], "mything.json")
-        await utils.featureCollectionToTable('mything', file)
-        let results = await db.layerData.where({layer: "mything"}).toArray()
+        let id = await utils.featureCollectionToTable('mything', file)
+        let results = await db.layerData.where({layer: id}).toArray()
         expect(results.length).toEqual(2)
     })
     it("should throw on incorrect data", async function() {

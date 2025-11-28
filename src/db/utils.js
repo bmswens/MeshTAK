@@ -8,7 +8,7 @@ async function featureCollectionToTable(name, file) {
         if (!Array.isArray(features) && Array.isArray(features.features)) {
             features = features.features
         }
-        await addLayer(name, features)
+        return await addLayer(name, features)
     }
     catch {
         try {
@@ -17,7 +17,7 @@ async function featureCollectionToTable(name, file) {
                 let row = JSON.parse(line)
                 features.push(row)
             }
-            await addLayer(name, features)
+            return await addLayer(name, features)
         }
         catch (err) {
             console.error(err)
@@ -33,12 +33,23 @@ function generateId() {
 }
 
 async function addLayer(name, data) {
-    await db.layers.add({ id: generateId(), name, display: 1 })
+    const id = generateId()
+    await db.layers.add({
+        name,
+        id,
+        display: 1,
+        style: {
+            color: "#2196f3",
+            fillColor: "#2196f3",
+            opacity: 0.2
+        }
+    })
     for (let row of data) {
         row.id = generateId()
-        row.layer = name
+        row.layer = id
         await db.layerData.add(row)
     }
+    return id
 }
 
 const utils = {

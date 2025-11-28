@@ -10,14 +10,14 @@ import db from '../../db'
 
 function UserLayer(props) {
 
-    const { name } = props
+    const { id, style } = props
 
     const rows = useLiveQuery(async () => {
-        let rows = await db.layerData.where({layer: name}).toArray()
+        let rows = await db.layerData.where({layer: id}).toArray()
         return rows
     }, [], [])
 
-    return rows.map((row, index) => <Feature geojson={row} key={`${name}-${index}`}/>)
+    return rows.map((row, index) => <Feature geojson={row} style={style} key={`${id}-${index}`}/>)
 
 }
 

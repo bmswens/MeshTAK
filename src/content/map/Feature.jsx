@@ -11,8 +11,9 @@ import PropTypes from 'prop-types'
 
 function Feature(props) {
 
+    const { geojson, style } = props
     const context = useLeafletContext()
-    const { geojson } = props
+    const self = React.useRef()
 
     React.useEffect(() => {
         // TODO: Have this open the <InfoDrawer>
@@ -24,18 +25,21 @@ function Feature(props) {
         // let feature = L.geoJSON(geojson, {
         //     onEachFeature: eventHandlers
         // })
-        let feature = L.geoJSON(geojson)
-        feature.addTo(context.map)
+        self.current = L.geoJSON(geojson, {
+            style
+        })
+        context.map.addLayer(self.current)
         return () => {
-            context.map.removeLayer(geojson)
+            context.map.removeLayer(self.current)
         }
-    }, [geojson])
+    }, [geojson, style])
 
     return null
 }
 
 Feature.propTypes = {
-    geojson: PropTypes.object
+    geojson: PropTypes.object,
+    style: PropTypes.object
 }
 
 export default Feature

@@ -16,7 +16,7 @@ describe('<Feature>', function () {
             },
             type: "Feature",
             name: "Center",
-            layer: "My Layer"
+            layer: 33
         })
         await db.layerData.add({
             id: 45,
@@ -26,7 +26,7 @@ describe('<Feature>', function () {
             },
             type: "Feature",
             name: "Center 2",
-            layer: "Not My Layer",
+            layer: 34,
         })
     })
     afterEach(async () => {

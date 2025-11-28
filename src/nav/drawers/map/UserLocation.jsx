@@ -5,8 +5,6 @@ import React from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Stack, Slider, Switch, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 // color picker
 import { MuiColorInput } from 'mui-color-input'
@@ -122,16 +120,6 @@ function DisplaySetting() {
 
 function UserLocation() {
 
-    const display = useLiveQuery(async () => {
-        let setting = await db.settings.get("map.userlocation.display")
-        if (setting === undefined) {
-            setting = {
-                value: true
-            }
-        }
-        return setting.value
-    }, [], [])
-
     return (
         <Accordion>
             <AccordionSummary
@@ -140,7 +128,9 @@ function UserLocation() {
                 id="user-layer"
             >
                 <Stack alignItems="center" direction="row" gap={1} >
-                    {display ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                    {/* <LayerVisbilityButton
+                        layerName="userlocation"
+                    /> */}
                     <Typography variant="h6">User Layer</Typography>
                 </Stack>
             </AccordionSummary>

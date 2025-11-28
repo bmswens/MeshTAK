@@ -4,7 +4,7 @@ import { MapContainer } from "react-leaflet"
 import db from '../../db'
 import UserLayer from './UserLayer'
 
-describe('<Feature>', function () {
+describe('<UserLayer>', function () {
     beforeEach(async () => {
         await db.layerData.add({
             id: 44,
@@ -14,7 +14,7 @@ describe('<Feature>', function () {
             },
             type: "Feature",
             name: "Center",
-            layer: "My Layer"
+            layer: 1
         })
         await db.layerData.add({
             id: 45,
@@ -24,7 +24,7 @@ describe('<Feature>', function () {
             },
             type: "Feature",
             name: "Center 2",
-            layer: "Not My Layer",
+            layer: 2,
         })
     })
     afterEach(async () => {
@@ -42,7 +42,7 @@ describe('<Feature>', function () {
                 }}
                 attributionControl={false}
             >
-                <UserLayer name="My Layer" />
+                <UserLayer name="My Layer" id={1} />
             </MapContainer>
         )
         await waitFor(() => {
