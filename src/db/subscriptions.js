@@ -10,7 +10,15 @@ async function subscribeMessage(message) {
                 longName: "Unknown"
             }
         }
-        new Notification(`${sender.longName}: ${message.data}`)
+        navigator.serviceWorker.ready.then(registration => {
+            registration.showNotification(
+                `New Message`,
+                {
+                    body: `${sender.longName}: ${message.data}`,
+                    icon: 'public/MeshTAK-192.png'
+                }
+            )
+        })
     }
 }
 

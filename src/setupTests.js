@@ -21,6 +21,12 @@ class MockNotification {
 
 window.Notification = MockNotification
 
+navigator.serviceWorker = {
+    ready: {
+        then: vi.fn()
+    }
+}
+
 navigator.geolocation = {
     getCurrentPosition: () => {
         return {

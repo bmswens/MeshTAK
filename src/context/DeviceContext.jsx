@@ -9,7 +9,7 @@ import { TransportWebBluetooth } from '@meshtastic/transport-web-bluetooth'
 
 // TS Log
 // Because utils isn't in the browser
-import {Logger} from 'tslog'
+import { Logger } from 'tslog'
 
 // Prop Types
 import PropTypes from 'prop-types'
@@ -21,8 +21,8 @@ import db from '../db';
 
 const DeviceContext = React.createContext({
     device: null,
-    connect: /* v8 ignore next */ async () => {},
-    disconnect: /* v8 ignore next */ async () => {}
+    connect: /* v8 ignore next */ async () => { },
+    disconnect: /* v8 ignore next */ async () => { }
 })
 
 
@@ -35,15 +35,22 @@ function DeviceContextProvider(props) {
             const statuses = ["granted", "denied"]
             if (!statuses.includes(Notification.permission)) {
                 Notification.requestPermission()
-                .then(permission => {
-                    if (permission === "granted") {
-                        db.settings.upsert("notifications", {value: true})
-                        new Notification('Notifications enabled for MeshTAK. You may disable them at any time in the "App Settings" menu.')
-                    }
-                    else {
-                        db.settings.upsert("notifications", {value: false})
-                    }
-                })
+                    .then(permission => {
+                        if (permission === "granted") {
+                            db.settings.upsert("notifications", { value: true })
+                            navigator.serviceWorker.ready.then(registration => {
+                                registration.showNotification(
+                                    `Notifications enabled.`,
+                                    {
+                                        icon: 'public/MeshTAK-192.png'
+                                    }
+                                )
+                            })
+                        }
+                        else {
+                            db.settings.upsert("notifications", { value: false })
+                        }
+                    })
             }
         }
     }, [device])
@@ -56,7 +63,7 @@ function DeviceContextProvider(props) {
         else {
             transport = await TransportWebBluetooth.create()
         }
-        const logger = new Logger({type: "pretty"})
+        const logger = new Logger({ type: "pretty" })
         const dev = new MeshDevice(transport)
         dev.log = logger
         startSubscriptions(dev)
@@ -70,7 +77,7 @@ function DeviceContextProvider(props) {
     }
 
     return (
-        <DeviceContext.Provider value={{device, connect, disconnect}}>
+        <DeviceContext.Provider value={{ device, connect, disconnect }}>
             {props.children}
         </DeviceContext.Provider>
     )
@@ -81,4 +88,4 @@ DeviceContextProvider.propTypes = {
 }
 
 export default DeviceContext
-export {DeviceContextProvider}
+export { DeviceContextProvider }
