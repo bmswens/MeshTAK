@@ -45,6 +45,8 @@ if (!Uint8Array.prototype.toHex) {
       };
     }
 
+     window.HTMLElement.prototype.scrollIntoView = vi.fn()
+
 expect.extend(matchers);
 afterEach(cleanup);
 

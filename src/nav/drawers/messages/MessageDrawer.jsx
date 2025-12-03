@@ -31,7 +31,7 @@ function MessageArea() {
             }
         }
         return w.value
-    }, [], [])
+    }, [], 25)
 
     React.useEffect(() => {
         function submit() {
@@ -94,19 +94,25 @@ function MessageArea() {
 
 function MessageDrawer() {
 
+    const bottom = React.useRef()
+
     const messages = useLiveQuery(() => {
         return db.messages.toArray()
     }, [], [])
 
     messages.sort((a, b) => a.rxTime - b.rxTime)
 
+    React.useEffect(() => {
+        bottom.current.scrollIntoView({ behavior: "smooth" })
+    }, [messages])
+
     return (
         <>
             <DrawerTopper />
-            <Stack spacing={1} sx={{ margin: 1 }}>
+            <Stack spacing={1} sx={{ margin: 1 }} >
                 <MessageArea />
                 {messages.map(message => <MessageCard {...message} key={message.id} />)}
-                <Box sx={{ height: "64px" }} />
+                <Box sx={{ height: "64px" }} ref={bottom} />
             </Stack>
         </>
     )
